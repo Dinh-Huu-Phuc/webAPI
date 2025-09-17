@@ -217,17 +217,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             }
           }
@@ -259,17 +259,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/addBookRequestDTO"
+                "$ref": "#/components/schemas/AddBookRequestDTO"
               }
             }
           }
@@ -346,6 +346,57 @@
   },
   "components": {
     "schemas": {
+      "AddBookRequestDTO": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "dateRead": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "genre": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateAdded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publisherID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "authorIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Author": {
         "type": "object",
         "properties": {
@@ -491,57 +542,6 @@
           },
           "summary": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "addBookRequestDTO": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "isRead": {
-            "type": "boolean"
-          },
-          "dateRead": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "rate": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "genre": {
-            "type": "string",
-            "nullable": true
-          },
-          "coverUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateAdded": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "publisherID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "authorIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
             "nullable": true
           }
         },

@@ -99,7 +99,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.BooksController",
+    "ContainingType": "WebAPI_simple.Controllers.BooksController",
     "Method": "AddBook",
     "RelativePath": "api/Books/add-book",
     "HttpMethod": "POST",
@@ -108,14 +108,14 @@
     "Parameters": [
       {
         "Name": "addBookRequestDTO",
-        "Type": "BookStoreApi.Models.DTOs.addBookRequestDTO",
+        "Type": "BookStoreApi.Models.DTOs.AddBookRequestDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.BooksController",
+    "ContainingType": "WebAPI_simple.Controllers.BooksController",
     "Method": "DeleteBookById",
     "RelativePath": "api/Books/delete-book-by-id/{id}",
     "HttpMethod": "DELETE",
@@ -131,7 +131,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.BooksController",
+    "ContainingType": "WebAPI_simple.Controllers.BooksController",
     "Method": "GetAll",
     "RelativePath": "api/Books/get-all-books",
     "HttpMethod": "GET",
@@ -141,7 +141,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.BooksController",
+    "ContainingType": "WebAPI_simple.Controllers.BooksController",
     "Method": "GetBookById",
     "RelativePath": "api/Books/get-book-by-id/{id}",
     "HttpMethod": "GET",
@@ -157,7 +157,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.BooksController",
+    "ContainingType": "WebAPI_simple.Controllers.BooksController",
     "Method": "UpdateBookById",
     "RelativePath": "api/Books/update-book-by-id/{id}",
     "HttpMethod": "PUT",
@@ -171,7 +171,7 @@
       },
       {
         "Name": "bookDTO",
-        "Type": "BookStoreApi.Models.DTOs.addBookRequestDTO",
+        "Type": "BookStoreApi.Models.DTOs.AddBookRequestDTO",
         "IsRequired": true
       }
     ],

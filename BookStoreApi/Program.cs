@@ -1,4 +1,5 @@
 
+using BookStoreApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 using WebAPI_simple.Data;
 
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 // EF Core
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IBookRepository, SQLBookRepository>();
 
 var app = builder.Build();
 

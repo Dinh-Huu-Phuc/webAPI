@@ -1,6 +1,6 @@
-﻿namespace BookStoreApi.Models.DTOs
+﻿namespace BookAPIStore.Models.DTO
 {
-    public record addBookRequestDTO
+    public class AddBookRequestDTO
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -13,6 +13,6 @@
 
         // Navigation Properties
         public int PublisherID { get; set; }
-        public List<int>? AuthorIds { get; set; }
+        public List<int> AuthorIds { get; set; }
     }
 }

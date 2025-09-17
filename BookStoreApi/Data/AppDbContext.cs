@@ -1,30 +1,32 @@
-﻿using BookStoreApi.Models.Domain;
+﻿using BookAPIStore.Models.Domain;
 using Microsoft.EntityFrameworkCore;
-using WebAPI_simple.Models.Domain;
 
-namespace WebAPI_simple.Data
+namespace WebAPI.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
-            : base(dbContextOptions) { }
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
+        {
 
+        }
+        // Define C# model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book_Author>()
+            // You can define the relationships between tables using the Fluent API
+            modelBuilder.Entity<Book_Authors>()
                 .HasOne(b => b.Book)
-                .WithMany(ba => ba.Book_Authors)
+                .WithMany(ba => ba.Book_Author)
                 .HasForeignKey(bi => bi.BookId);
 
-            modelBuilder.Entity<Book_Author>()
+            modelBuilder.Entity<Book_Authors>()
                 .HasOne(b => b.Author)
-                .WithMany(ba => ba.BookAuthors)
+                .WithMany(ba => ba.Book_Author)
                 .HasForeignKey(bi => bi.AuthorId);
         }
 
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<Book_Author> Books_Authors { get; set; }
-        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Books> Books { get; set; }
+        public DbSet<Authors> Authors { get; set; }
+        public DbSet<Book_Authors> Books_Authors { get; set; }
+        public DbSet<Publishers> Publishers { get; set; }
     }
 }

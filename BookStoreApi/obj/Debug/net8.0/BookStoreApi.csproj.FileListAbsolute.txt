@@ -146,3 +146,4 @@ E:\API_WEB\BookStoreApi\BookStoreApi\obj\Debug\net8.0\refint\BookStoreApi.dll
 E:\API_WEB\BookStoreApi\BookStoreApi\obj\Debug\net8.0\BookStoreApi.pdb
 E:\API_WEB\BookStoreApi\BookStoreApi\obj\Debug\net8.0\BookStoreApi.genruntimeconfig.cache
 E:\API_WEB\BookStoreApi\BookStoreApi\obj\Debug\net8.0\ref\BookStoreApi.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\obj\Debug\net8.0\BookStoreApi.sourcelink.json
