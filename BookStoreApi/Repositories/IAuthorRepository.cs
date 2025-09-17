@@ -1,6 +1,8 @@
 ﻿using BookAPIStore.Models.Domain;
-using WebAPI_simple.Models.DTO;
-namespace WebAPI_simple.Repositories
+using BookAPIStore.Models.DTO;
+
+
+namespace BookAPIStore.Repositories
 {
     public interface IAuthorRepository
     {
