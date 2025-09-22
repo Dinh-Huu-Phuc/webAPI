@@ -1,7 +1,8 @@
 ﻿using BookAPIStore.Models.DTO;
+using BookAPIStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI_simple.Repositories;
+
 
 namespace BookAPIStore.Controllers
 {
@@ -40,8 +41,7 @@ namespace BookAPIStore.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var created = _publisherRepo.AddPublisher(request);
-            // Vì method AddPublisher trong repo trả về AddPublisherRequestDTO theo PDF,
-            // ta trả Ok hoặc Created theo nhu cầu. Ở đây dùng Ok cho sát chữ ký.
+          
             return Ok(created);
         }
 

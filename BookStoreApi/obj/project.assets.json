@@ -4448,11 +4448,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\API_WEB\\BookStoreApi\\BookStoreApi\\BookStoreApi.csproj",
-      "projectName": "BookStoreApi",
-      "projectPath": "E:\\API_WEB\\BookStoreApi\\BookStoreApi\\BookStoreApi.csproj",
+      "projectUniqueName": "E:\\API_WEB\\BookAPIStore\\BookAPIStore\\BookAPIStore.csproj",
+      "projectName": "BookAPIStore",
+      "projectPath": "E:\\API_WEB\\BookAPIStore\\BookAPIStore\\BookAPIStore.csproj",
       "packagesPath": "C:\\Users\\ITD\\.nuget\\packages\\",
-      "outputPath": "E:\\API_WEB\\BookStoreApi\\BookStoreApi\\obj\\",
+      "outputPath": "E:\\API_WEB\\BookAPIStore\\BookAPIStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

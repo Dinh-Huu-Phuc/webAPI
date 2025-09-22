@@ -1,7 +1,7 @@
 ﻿using BookAPIStore.Models.Domain;
 using BookAPIStore.Models.DTO;
 
-namespace WebAPI_simple.Repositories
+namespace BookAPIStore.Repositories
 {
     public interface IPublisherRepository
     {

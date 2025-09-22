@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using BookAPIStore.Models.DTO;
 using BookAPIStore.Models.Domain;        
-using WebAPI.Data;                       
-using WebAPI_simple.Repositories;        
+using WebAPI.Data;
+using BookAPIStore.Repositories;
 
 namespace BookAPIStore.Repositories
 {
@@ -44,7 +44,7 @@ namespace BookAPIStore.Repositories
         // ADD
         public AddPublisherRequestDTO AddPublisher(AddPublisherRequestDTO addPublisherRequestDTO)
         {
-            var entity = new Publishers   // <-- dùng entity plural đúng với Domain của bạn
+            var entity = new Publishers  
             {
                 Name = addPublisherRequestDTO.Name
             };
@@ -52,14 +52,14 @@ namespace BookAPIStore.Repositories
             _context.Publishers.Add(entity);
             _context.SaveChanges();
 
-            // Theo PDF, method này trả về AddPublisherRequestDTO
+         
             return new AddPublisherRequestDTO
             {
                 Name = entity.Name
             };
         }
 
-        // UPDATE BY ID
+        
         public PublisherNoIdDTO UpdatePublisherById(int id, PublisherNoIdDTO publisherNoIdDTO)
         {
             var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
@@ -74,11 +74,11 @@ namespace BookAPIStore.Repositories
             };
         }
 
-        // DELETE BY ID  (quan trọng: TRẢ VỀ Publishers để khớp interface)
+        
         public Publishers DeletePublisherById(int id)
         {
             var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (entity == null) return null!; // nếu interface không nullable, vẫn compile; controller nhớ check null
+            if (entity == null) return null!; 
 
             _context.Publishers.Remove(entity);
             _context.SaveChanges();

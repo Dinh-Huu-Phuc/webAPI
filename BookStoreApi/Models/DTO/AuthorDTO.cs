@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI_simple.Models.DTO
+namespace BookAPIStore.Models.DTO
 {
     public class AuthorDTO
     {
