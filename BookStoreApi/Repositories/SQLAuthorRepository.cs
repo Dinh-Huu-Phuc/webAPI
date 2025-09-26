@@ -15,6 +15,8 @@ namespace BookAPIStore.Repositories
         {
             _context = context;
         }
+        public bool HasAnyBook(int authorId)
+           => _context.Book_Authors.Any(ba => ba.AuthorId == authorId);
 
         // GET ALL
         public List<AuthorDTO> GellAllAuthors()

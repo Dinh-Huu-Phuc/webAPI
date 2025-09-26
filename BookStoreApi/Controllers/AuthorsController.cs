@@ -57,6 +57,16 @@ namespace BookAPIStore.Controllers
         [HttpDelete("deleteAuthorById/{id:int}")]
         public IActionResult DeleteAuthorById([FromRoute] int id)
         {
+            // BÀI 8: nếu còn Book_Authors → báo lỗi
+            if (_authorRepo.HasAnyBook(id))
+            {
+                return BadRequest(new
+                {
+                    error = "Không thể xóa Author vì vẫn còn sách liên kết qua Book_Author.",
+                    suggestion = "Hãy gỡ liên kết trong Book_Author trước khi xóa."
+                });
+            }
+
             var deleted = _authorRepo.DeleteAuthorById(id);
             if (deleted == null) return NotFound();
             return NoContent();

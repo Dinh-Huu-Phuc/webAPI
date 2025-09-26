@@ -25,7 +25,6 @@ namespace WebAPI.Controllers
         [HttpGet("get-all-books")]
         public IActionResult GetAll()
         {
-            // su dung reposity pattern  
             var allBooks = _bookRepository.GetAllBooks();
             return Ok(allBooks);
         }
@@ -43,6 +42,16 @@ namespace WebAPI.Controllers
         //[Authorize(Roles = "Write")]
         public IActionResult AddBook([FromBody] AddBookRequestDTO addBookRequestDTO)
         {
+            
+            var publisherExists = _dbContext.Publishers.Any(p => p.Id == addBookRequestDTO.PublisherID);
+            if (!publisherExists)
+            {
+                ModelState.AddModelError(nameof(addBookRequestDTO.PublisherID),
+                    "PublisherID không tồn tại trong bảng Publishers.");
+                return BadRequest(ModelState);
+            }
+            // =====================================================
+
             if (ValidateAddBook(addBookRequestDTO))
             {
                 var bookAdd = _bookRepository.AddBook(addBookRequestDTO);
@@ -54,17 +63,39 @@ namespace WebAPI.Controllers
         [HttpPost("and-book")]
         public IActionResult AddBookNew([FromBody] AddBookRequestDTO addBookRequestDTO)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // ========== Bài 4: PublisherID phải tồn tại ==========
+            var publisherExists = _dbContext.Publishers.Any(p => p.Id == addBookRequestDTO.PublisherID);
+            if (!publisherExists)
             {
-                var bookAdd = _bookRepository.AddBook(addBookRequestDTO);
-                return Ok(bookAdd);
+                ModelState.AddModelError(nameof(addBookRequestDTO.PublisherID),
+                    "PublisherID không tồn tại trong bảng Publishers.");
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+            
+
+            var bookAdd = _bookRepository.AddBook(addBookRequestDTO);
+            return Ok(bookAdd);
         }
 
         [HttpPut("update-book-by-id/{id}")]
         public IActionResult UpdateBookById(int id, [FromBody] AddBookRequestDTO bookDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            
+            var publisherExists = _dbContext.Publishers.Any(p => p.Id == bookDTO.PublisherID);
+            if (!publisherExists)
+            {
+                ModelState.AddModelError(nameof(bookDTO.PublisherID),
+                    "PublisherID không tồn tại trong bảng Publishers.");
+                return BadRequest(ModelState);
+            }
+            
+
             var updateBook = _bookRepository.UpdateBookById(id, bookDTO);
             return Ok(updateBook);
         }
@@ -81,20 +112,22 @@ namespace WebAPI.Controllers
         {
             if (addBookRequestDTO == null)
             {
-                ModelState.AddModelError(nameof(addBookRequestDTO), $"Please add book data");
+                ModelState.AddModelError(nameof(addBookRequestDTO), "Please add book data");
                 return false;
             }
 
             // kiem tra Description NotNull 
             if (string.IsNullOrEmpty(addBookRequestDTO.Description))
             {
-                ModelState.AddModelError(nameof(addBookRequestDTO.Description), $"{nameof(addBookRequestDTO.Description)} cannot be null");
+                ModelState.AddModelError(nameof(addBookRequestDTO.Description),
+                    $"{nameof(addBookRequestDTO.Description)} cannot be null");
             }
 
             // kiem tra rating (0,5) 
             if (addBookRequestDTO.Rate < 0 || addBookRequestDTO.Rate > 5)
             {
-                ModelState.AddModelError(nameof(addBookRequestDTO.Rate), $"{nameof(addBookRequestDTO.Rate)} cannot be less than 0 and more than 5");
+                ModelState.AddModelError(nameof(addBookRequestDTO.Rate),
+                    $"{nameof(addBookRequestDTO.Rate)} cannot be less than 0 and more than 5");
             }
 
             if (ModelState.ErrorCount > 0)

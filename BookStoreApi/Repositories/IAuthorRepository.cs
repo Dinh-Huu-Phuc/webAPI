@@ -11,5 +11,6 @@ namespace BookAPIStore.Repositories
         AddAuthorRequestDTO AddAuthor(AddAuthorRequestDTO addAuthorRequestDTO);
         AuthorNoIdDTO UpdateAuthorById(int id, AuthorNoIdDTO authorNoIdDTO);
         Authors? DeleteAuthorById(int id);
+        bool HasAnyBook(int authorId);
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using BookAPIStore.Models.DTO;
-using BookAPIStore.Models.Domain;        
+using BookAPIStore.Models.Domain;
 using WebAPI.Data;
-using BookAPIStore.Repositories;
 
 namespace BookAPIStore.Repositories
 {
@@ -17,7 +15,17 @@ namespace BookAPIStore.Repositories
             _context = context;
         }
 
-        // GET ALL
+        // --- Bài 3: Check trùng tên (dành cho Controller gọi) ---
+        public bool ExistsByName(string name)
+            => _context.Publishers.Any(p => p.Name == name);
+
+        public bool ExistsByNameExcludingId(string name, int excludeId)
+            => _context.Publishers.Any(p => p.Name == name && p.Id != excludeId);
+
+        public bool HasBooks(int publisherId)
+            => _context.Books.Any(b => b.PublisherID == publisherId);
+
+        // --- GET ALL ---
         public List<PublisherDTO> GetAllPublishers()
         {
             return _context.Publishers
@@ -29,11 +37,11 @@ namespace BookAPIStore.Repositories
                 .ToList();
         }
 
-        // GET BY ID
+        // --- GET BY ID ---
         public PublisherNoIdDTO GetPublisherById(int id)
         {
             var publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (publisher == null) return null!; // giữ nguyên đúng kiểu trong PDF
+            if (publisher == null) return null!;
 
             return new PublisherNoIdDTO
             {
@@ -41,10 +49,10 @@ namespace BookAPIStore.Repositories
             };
         }
 
-        // ADD
+        // --- ADD ---
         public AddPublisherRequestDTO AddPublisher(AddPublisherRequestDTO addPublisherRequestDTO)
         {
-            var entity = new Publishers  
+            var entity = new Publishers
             {
                 Name = addPublisherRequestDTO.Name
             };
@@ -52,14 +60,13 @@ namespace BookAPIStore.Repositories
             _context.Publishers.Add(entity);
             _context.SaveChanges();
 
-         
             return new AddPublisherRequestDTO
             {
                 Name = entity.Name
             };
         }
 
-        
+        // --- UPDATE ---
         public PublisherNoIdDTO UpdatePublisherById(int id, PublisherNoIdDTO publisherNoIdDTO)
         {
             var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
@@ -74,14 +81,15 @@ namespace BookAPIStore.Repositories
             };
         }
 
-        
+        // --- DELETE ---
         public Publishers DeletePublisherById(int id)
         {
             var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (entity == null) return null!; 
+            if (entity == null) return null!;
 
             _context.Publishers.Remove(entity);
             _context.SaveChanges();
+
             return entity;
         }
     }

@@ -10,5 +10,8 @@ namespace BookAPIStore.Repositories
         AddPublisherRequestDTO AddPublisher(AddPublisherRequestDTO addPublisherRequestDTO);
         PublisherNoIdDTO UpdatePublisherById(int id, PublisherNoIdDTO publisherNoIdDTO);
         Publishers? DeletePublisherById(int id);
+        bool ExistsByName(string name);
+        bool ExistsByNameExcludingId(string name, int excludeId);
+        bool HasBooks(int publisherId);
     }
 }
