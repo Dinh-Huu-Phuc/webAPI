@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookAPIStore.Models.DTO
+namespace WebAPI.Models.DTO
 {
     public class AddBookRequestDTO
     {
@@ -10,7 +10,6 @@ namespace BookAPIStore.Models.DTO
         public string? Description { get; set; }
         public bool IsRead { get; set; }
         public DateTime? DateRead { get; set; }
-        //[Range(0,5)]
         public int? Rate { get; set; }
         public string? Genre { get; set; }
         public string? CoverUrl { get; set; }

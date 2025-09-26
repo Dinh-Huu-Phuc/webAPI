@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookAPIStore.Repositories;
 using BookAPIStore.Models.DTO;
+using WebAPI.Repositories;
+using WebAPI.Models.DTO;
 
 namespace BookAPIStore.Controllers
 {

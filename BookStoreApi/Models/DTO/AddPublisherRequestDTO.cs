@@ -1,4 +1,4 @@
-﻿namespace BookAPIStore.Models.DTO
+﻿namespace WebAPI.Models.DTO
 {
     public class AddPublisherRequestDTO
     {

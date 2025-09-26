@@ -1,5 +1,6 @@
-﻿using BookAPIStore.Models.Domain;
+﻿
 using BookAPIStore.Models.DTO;
+using WebAPI.Models.Domain;
 
 namespace BookAPIStore.Repositories
 {

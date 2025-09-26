@@ -1,89 +1,82 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using WebAPI.Data;                          
-using BookAPIStore.Models.Domain;
-using BookAPIStore.Models.DTO;
+﻿using WebAPI.Data;
+using WebAPI.Models.Domain;
+using WebAPI.Models.DTO;
 
-
-namespace BookAPIStore.Repositories
+namespace WebAPI.Repositories
 {
     public class SQLAuthorRepository : IAuthorRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _dbContext;
 
-        public SQLAuthorRepository(AppDbContext context)
+        public SQLAuthorRepository(AppDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
-        public bool HasAnyBook(int authorId)
-           => _context.Book_Authors.Any(ba => ba.AuthorId == authorId);
 
-        // GET ALL
         public List<AuthorDTO> GellAllAuthors()
         {
-            return _context.Authors
-                .Select(a => new AuthorDTO
-                {
-                    Id = a.Id,
-                    FullName = a.FullName
-                })
-                .ToList();
+            var allAuthors = _dbContext.Authors.Select(author => new AuthorDTO
+            {
+                Id = author.Id,
+                FullName = author.FullName
+            }).ToList();
+
+            return allAuthors;
         }
 
-        // GET BY ID
         public AuthorNoIdDTO GetAuthorById(int id)
         {
-            var entity = _context.Authors.FirstOrDefault(a => a.Id == id);
-            if (entity == null) return null!;
-
-            return new AuthorNoIdDTO
+            var authorWithDomain = _dbContext.Authors.Where(n => n.Id == id);
+            var authorWithIdDTO = authorWithDomain.Select(author => new AuthorNoIdDTO
             {
-                FullName = entity.FullName
-            };
+                FullName = author.FullName
+            }).FirstOrDefault();
+
+            return authorWithIdDTO;
         }
 
-        // ADD
         public AddAuthorRequestDTO AddAuthor(AddAuthorRequestDTO addAuthorRequestDTO)
         {
-            var entity = new Authors
+            var authorDomain = new Authors
             {
                 FullName = addAuthorRequestDTO.FullName
             };
 
-            _context.Authors.Add(entity);
-            _context.SaveChanges();
+            _dbContext.Authors.Add(authorDomain);
+            _dbContext.SaveChanges();
 
-            // Theo PDF, method trả về AddAuthorRequestDTO
-            return new AddAuthorRequestDTO
-            {
-                FullName = entity.FullName
-            };
+            return addAuthorRequestDTO;
         }
 
-        // UPDATE BY ID
         public AuthorNoIdDTO UpdateAuthorById(int id, AuthorNoIdDTO authorNoIdDTO)
         {
-            var entity = _context.Authors.FirstOrDefault(a => a.Id == id);
-            if (entity == null) return null!;
-
-            entity.FullName = authorNoIdDTO.FullName;
-            _context.SaveChanges();
-
-            return new AuthorNoIdDTO
+            var authorDomain = _dbContext.Authors.FirstOrDefault(n => n.Id == id);
+            if (authorDomain != null)
             {
-                FullName = entity.FullName
-            };
+                authorDomain.FullName = authorNoIdDTO.FullName;
+                _dbContext.SaveChanges();
+            }
+
+            return authorNoIdDTO;
         }
 
-        // DELETE BY ID
         public Authors? DeleteAuthorById(int id)
         {
-            var entity = _context.Authors.FirstOrDefault(a => a.Id == id);
-            if (entity == null) return null;
+            var authorDomain = _dbContext.Authors.FirstOrDefault(n => n.Id == id);
+            if (authorDomain != null)
+            {
+                _dbContext.Authors.Remove(authorDomain);
+                _dbContext.SaveChanges();
+                return authorDomain;
+            }
 
-            _context.Authors.Remove(entity);
-            _context.SaveChanges();
-            return entity;
+            return null;
+        }
+
+        // ✅ Kiểm tra xem tác giả có được gán vào bất kỳ cuốn sách nào không
+        public bool HasAnyBook(int authorId)
+        {
+            return _dbContext.Book_Authors.Any(ba => ba.AuthorId == authorId);
         }
     }
 }

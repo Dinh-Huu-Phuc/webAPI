@@ -1,16 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookAPIStore.Models.Domain
+namespace WebAPI.Models.Domain
 {
     public class Authors
     {
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MinLength(3, ErrorMessage = "Tên tác giả tối thiểu 3 ký tự.")]
         public string FullName { get; set; }
-        // Navigation properties - One author has many Book_author
+
+        // Many-to-many: Author <-> Book (via Book_Authors)
         public List<Book_Authors> Book_Author { get; set; }
     }
 }

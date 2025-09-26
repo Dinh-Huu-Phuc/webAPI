@@ -1,96 +1,99 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BookAPIStore.Models.DTO;
-using BookAPIStore.Models.Domain;
+﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
+using WebAPI.Models.Domain;
+using WebAPI.Models.DTO;
 
-namespace BookAPIStore.Repositories
+namespace WebAPI.Repositories
 {
     public class SQLPublisherRepository : IPublisherRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _dbContext;
 
-        public SQLPublisherRepository(AppDbContext context)
+        public SQLPublisherRepository(AppDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
-        // --- Bài 3: Check trùng tên (dành cho Controller gọi) ---
-        public bool ExistsByName(string name)
-            => _context.Publishers.Any(p => p.Name == name);
-
-        public bool ExistsByNameExcludingId(string name, int excludeId)
-            => _context.Publishers.Any(p => p.Name == name && p.Id != excludeId);
-
-        public bool HasBooks(int publisherId)
-            => _context.Books.Any(b => b.PublisherID == publisherId);
-
-        // --- GET ALL ---
         public List<PublisherDTO> GetAllPublishers()
         {
-            return _context.Publishers
-                .Select(p => new PublisherDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name
-                })
-                .ToList();
+            var allPublisher = _dbContext.Publishers.Select(publisher => new PublisherDTO
+            {
+                Id = publisher.Id,
+                Name = publisher.Name
+            }).ToList();
+
+            return allPublisher;
         }
 
-        // --- GET BY ID ---
         public PublisherNoIdDTO GetPublisherById(int id)
         {
-            var publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (publisher == null) return null!;
-
-            return new PublisherNoIdDTO
+            var publisherWithDomain = _dbContext.Publishers.Where(n => n.Id == id);
+            var publisherWithIdDTO = publisherWithDomain.Select(publisher => new PublisherNoIdDTO
             {
-                Name = publisher.Name
-            };
+                Name = publisher.Name,
+            }).FirstOrDefault();
+
+            return publisherWithIdDTO;
         }
 
-        // --- ADD ---
         public AddPublisherRequestDTO AddPublisher(AddPublisherRequestDTO addPublisherRequestDTO)
         {
-            var entity = new Publishers
+            var publisherDomain = new Publishers
             {
                 Name = addPublisherRequestDTO.Name
             };
 
-            _context.Publishers.Add(entity);
-            _context.SaveChanges();
+            _dbContext.Publishers.Add(publisherDomain);
+            _dbContext.SaveChanges();
 
-            return new AddPublisherRequestDTO
-            {
-                Name = entity.Name
-            };
+            return addPublisherRequestDTO;
         }
 
-        // --- UPDATE ---
         public PublisherNoIdDTO UpdatePublisherById(int id, PublisherNoIdDTO publisherNoIdDTO)
         {
-            var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (entity == null) return null!;
-
-            entity.Name = publisherNoIdDTO.Name;
-            _context.SaveChanges();
-
-            return new PublisherNoIdDTO
+            var publisherDomain = _dbContext.Publishers.FirstOrDefault(n => n.Id == id);
+            if (publisherDomain != null)
             {
-                Name = entity.Name
-            };
+                publisherDomain.Name = publisherNoIdDTO.Name;
+                _dbContext.SaveChanges();
+            }
+
+            return publisherNoIdDTO;
         }
 
-        // --- DELETE ---
-        public Publishers DeletePublisherById(int id)
+        public Publishers? DeletePublisherById(int id)
         {
-            var entity = _context.Publishers.FirstOrDefault(p => p.Id == id);
-            if (entity == null) return null!;
+            var publisherDomain = _dbContext.Publishers.FirstOrDefault(n => n.Id == id);
+            if (publisherDomain != null)
+            {
+                _dbContext.Publishers.Remove(publisherDomain);
+                _dbContext.SaveChanges();
+                return publisherDomain;
+            }
 
-            _context.Publishers.Remove(entity);
-            _context.SaveChanges();
+            return null;
+        }
 
-            return entity;
+        public bool ExistsByName(string name)
+        {
+            return _dbContext.Publishers.Any(p => p.Name.ToLower() == name.ToLower());
+        }
+
+        public bool ExistsById(int id)
+        {
+            return _dbContext.Publishers.Any(p => p.Id == id);
+        }
+
+        // ✅ Method bổ sung 1: Kiểm tra tên đã tồn tại nhưng loại trừ theo ID
+        public bool ExistsByNameExcludingId(string name, int excludeId)
+        {
+            return _dbContext.Publishers.Any(p => p.Name.ToLower() == name.ToLower() && p.Id != excludeId);
+        }
+
+        // ✅ Method bổ sung 2: Kiểm tra publisher có sách nào không
+        public bool HasBooks(int publisherId)
+        {
+            return _dbContext.Books.Any(book => book.PublisherID == publisherId);
         }
     }
 }
