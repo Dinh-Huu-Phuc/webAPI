@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BookStoreApi.Migrations
+namespace BookStoreApi.Migrations.AppDb
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateAuthDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,12 +45,11 @@ namespace BookStoreApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsRead = table.Column<bool>(type: "bit", nullable: false),
                     DateRead = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: true),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoverUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PublisherID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -66,7 +65,7 @@ namespace BookStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books_Authors",
+                name: "Book_Authors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -76,15 +75,15 @@ namespace BookStoreApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books_Authors", x => x.Id);
+                    table.PrimaryKey("PK_Book_Authors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Books_Authors_Authors_AuthorId",
+                        name: "FK_Book_Authors_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Books_Authors_Books_BookId",
+                        name: "FK_Book_Authors_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
@@ -92,26 +91,26 @@ namespace BookStoreApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_PublisherID",
-                table: "Books",
-                column: "PublisherID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_Authors_AuthorId",
-                table: "Books_Authors",
+                name: "IX_Book_Authors_AuthorId",
+                table: "Book_Authors",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_Authors_BookId",
-                table: "Books_Authors",
+                name: "IX_Book_Authors_BookId",
+                table: "Book_Authors",
                 column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_PublisherID",
+                table: "Books",
+                column: "PublisherID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Books_Authors");
+                name: "Book_Authors");
 
             migrationBuilder.DropTable(
                 name: "Authors");

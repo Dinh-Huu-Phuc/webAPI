@@ -9,11 +9,11 @@ using WebAPI.Data;
 
 #nullable disable
 
-namespace BookAPIStore.Migrations
+namespace BookStoreApi.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250922033047_AddUnique_BookAuthor_and_PublisherName")]
-    partial class AddUnique_BookAuthor_and_PublisherName
+    [Migration("20250929032032_AddBookAuthorsTable")]
+    partial class AddBookAuthorsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace BookAPIStore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Authors", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Authors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace BookAPIStore.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Book_Authors", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Book_Authors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace BookAPIStore.Migrations
                     b.ToTable("Book_Authors");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Books", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +110,7 @@ namespace BookAPIStore.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Publishers", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Publishers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,26 +120,22 @@ namespace BookAPIStore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Book_Authors", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Book_Authors", b =>
                 {
-                    b.HasOne("BookAPIStore.Models.Domain.Authors", "Author")
+                    b.HasOne("WebAPI.Models.Domain.Authors", "Author")
                         .WithMany("Book_Author")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookAPIStore.Models.Domain.Books", "Book")
+                    b.HasOne("WebAPI.Models.Domain.Books", "Book")
                         .WithMany("Book_Author")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -150,9 +146,9 @@ namespace BookAPIStore.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Books", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
                 {
-                    b.HasOne("BookAPIStore.Models.Domain.Publishers", "Publisher")
+                    b.HasOne("WebAPI.Models.Domain.Publishers", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -161,17 +157,17 @@ namespace BookAPIStore.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Authors", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Authors", b =>
                 {
                     b.Navigation("Book_Author");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Books", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
                 {
                     b.Navigation("Book_Author");
                 });
 
-            modelBuilder.Entity("BookAPIStore.Models.Domain.Publishers", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Publishers", b =>
                 {
                     b.Navigation("Books");
                 });

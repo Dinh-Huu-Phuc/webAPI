@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI_simple.Data;
+using WebAPI.Data;
 
 #nullable disable
 
-namespace BookStoreApi.Migrations
+namespace BookStoreApi.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250917075932_Book")]
-    partial class Book
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace BookStoreApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookStoreApi.Models.Domain.Author", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Authors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,73 +39,7 @@ namespace BookStoreApi.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("BookStoreApi.Models.Domain.Publisher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Publishers");
-                });
-
-            modelBuilder.Entity("WebAPI_simple.Models.Domain.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CoverUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateRead")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("PublisherID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Rate")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PublisherID");
-
-                    b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("WebAPI_simple.Models.Domain.Book_Author", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Book_Authors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,30 +59,81 @@ namespace BookStoreApi.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Books_Authors");
+                    b.ToTable("Book_Authors");
                 });
 
-            modelBuilder.Entity("WebAPI_simple.Models.Domain.Book", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
                 {
-                    b.HasOne("BookStoreApi.Models.Domain.Publisher", "Publisher")
-                        .WithMany("Books")
-                        .HasForeignKey("PublisherID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Publisher");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CoverUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateRead")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PublisherID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PublisherID");
+
+                    b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("WebAPI_simple.Models.Domain.Book_Author", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Publishers", b =>
                 {
-                    b.HasOne("BookStoreApi.Models.Domain.Author", "Author")
-                        .WithMany("BookAuthors")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publishers");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Domain.Book_Authors", b =>
+                {
+                    b.HasOne("WebAPI.Models.Domain.Authors", "Author")
+                        .WithMany("Book_Author")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAPI_simple.Models.Domain.Book", "Book")
-                        .WithMany("Book_Authors")
+                    b.HasOne("WebAPI.Models.Domain.Books", "Book")
+                        .WithMany("Book_Author")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -161,19 +143,30 @@ namespace BookStoreApi.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookStoreApi.Models.Domain.Author", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
                 {
-                    b.Navigation("BookAuthors");
+                    b.HasOne("WebAPI.Models.Domain.Publishers", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("BookStoreApi.Models.Domain.Publisher", b =>
+            modelBuilder.Entity("WebAPI.Models.Domain.Authors", b =>
+                {
+                    b.Navigation("Book_Author");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Domain.Books", b =>
+                {
+                    b.Navigation("Book_Author");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Domain.Publishers", b =>
                 {
                     b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("WebAPI_simple.Models.Domain.Book", b =>
-                {
-                    b.Navigation("Book_Authors");
                 });
 #pragma warning restore 612, 618
         }

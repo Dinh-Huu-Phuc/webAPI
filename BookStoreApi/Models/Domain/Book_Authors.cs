@@ -1,5 +1,8 @@
-﻿namespace WebAPI.Models.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebAPI.Models.Domain
 {
+    [Table("Book_Authors")] 
     public class Book_Authors
     {
         public int Id { get; set; }

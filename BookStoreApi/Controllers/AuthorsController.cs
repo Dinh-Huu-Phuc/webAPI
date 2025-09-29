@@ -3,11 +3,13 @@ using BookAPIStore.Repositories;
 using BookAPIStore.Models.DTO;
 using WebAPI.Repositories;
 using WebAPI.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookAPIStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorRepository _authorRepo;

@@ -1,5 +1,6 @@
 ﻿using BookAPIStore.Models.DTO;
 using BookAPIStore.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.DTO;
@@ -9,6 +10,7 @@ namespace BookAPIStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PublishersController : ControllerBase
     {
         private readonly IPublisherRepository _publisherRepo;
