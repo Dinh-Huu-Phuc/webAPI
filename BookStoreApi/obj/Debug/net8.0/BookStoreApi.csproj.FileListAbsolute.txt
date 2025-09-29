@@ -153,3 +153,12 @@ E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Microsoft.AspNetCore.Crypt
 E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.AspNetCore.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+E:\API_WEB\BookStoreApi\BookStoreApi\bin\Debug\net8.0\Serilog.Sinks.File.dll

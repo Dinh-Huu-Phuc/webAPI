@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
         private readonly AppDbContext _dbContext;
         private readonly IBookRepository _bookRepository;
         private readonly IPublisherRepository _publisherRepository;
+
         private const int MAX_BOOKS_PER_AUTHOR = 20;
         private const int MAX_BOOKS_PER_PUBLISHER_PER_YEAR = 100;
 

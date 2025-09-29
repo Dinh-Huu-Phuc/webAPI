@@ -9,8 +9,17 @@ using BookStoreApi;
 using Microsoft.AspNetCore.Identity;
 using BookStoreApi.Repositories;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var _logger = new LoggerConfiguration()
+    .WriteTo.Console()// ghi ra console 
+    .WriteTo.File("Logs/Book_log.txt", rollingInterval: RollingInterval.Minute) //ghi ra file lưu trong thư mục Logs 
+    .MinimumLevel.Information()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(_logger);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

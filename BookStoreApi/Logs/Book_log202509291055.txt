@@ -1,0 +1,24 @@
+2025-09-29 10:55:31.364 +07:00 [INF] User profile is available. Using 'C:\Users\ITD\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-29 10:55:31.484 +07:00 [INF] Now listening on: https://localhost:7207
+2025-09-29 10:55:31.485 +07:00 [INF] Now listening on: http://localhost:5047
+2025-09-29 10:55:31.517 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-29 10:55:31.518 +07:00 [INF] Hosting environment: Development
+2025-09-29 10:55:31.518 +07:00 [INF] Content root path: E:\API_WEB\BookStoreApi\BookStoreApi
+2025-09-29 10:55:31.882 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/swagger/index.html - null null
+2025-09-29 10:55:31.971 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/swagger/index.html - 200 null text/html;charset=utf-8 89.6358ms
+2025-09-29 10:55:31.974 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/_vs/browserLink - null null
+2025-09-29 10:55:31.974 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-29 10:55:31.981 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 7.3504ms
+2025-09-29 10:55:31.995 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/_vs/browserLink - 200 null text/javascript; charset=UTF-8 21.1398ms
+2025-09-29 10:55:32.017 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/swagger/v1/swagger.json - null null
+2025-09-29 10:55:32.026 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.2837ms
+2025-09-29 10:55:42.050 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/api/Author/get-all-author - null null
+2025-09-29 10:55:42.088 +07:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-09-29 10:55:42.090 +07:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-29 10:55:42.091 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/api/Author/get-all-author - 401 0 null 41.2095ms
+2025-09-29 10:55:50.159 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/api/Authors/getAllAuthor - null null
+2025-09-29 10:55:50.164 +07:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-09-29 10:55:50.164 +07:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-29 10:55:50.165 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/api/Authors/getAllAuthor - 401 0 null 6.0458ms
