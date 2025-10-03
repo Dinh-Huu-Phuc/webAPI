@@ -300,6 +300,58 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookStoreApi.Controllers.ImagesController",
+    "Method": "DownloadImage",
+    "RelativePath": "api/Images/Download",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookStoreApi.Controllers.ImagesController",
+    "Method": "GetInfoAllImages",
+    "RelativePath": "api/Images/GetAllImages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookStoreApi.Controllers.ImagesController",
+    "Method": "Upload",
+    "RelativePath": "api/Images/Upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.PublisherController",
     "Method": "AddPublisher",
     "RelativePath": "api/Publisher/add-Publisher",

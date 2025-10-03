@@ -1,0 +1,38 @@
+2025-10-03 07:57:04.024 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7207/api/Images/Upload - multipart/form-data; boundary=----WebKitFormBoundarykUpZ8F2VIgBYQQss 1424170
+2025-10-03 07:57:04.682 +07:00 [INF] Executing endpoint 'BookStoreApi.Controllers.ImagesController.Upload (BookStoreApi)'
+2025-10-03 07:57:04.697 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Upload(BookStoreApi.Models.DTO.ImageUploadRequestDTO) on controller BookStoreApi.Controllers.ImagesController (BookStoreApi).
+2025-10-03 07:57:04.701 +07:00 [INF] Executed action BookStoreApi.Controllers.ImagesController.Upload (BookStoreApi) in 1.4153ms
+2025-10-03 07:57:04.702 +07:00 [INF] Executed endpoint 'BookStoreApi.Controllers.ImagesController.Upload (BookStoreApi)'
+2025-10-03 07:57:04.705 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'BookStoreApi.Repositories.IImageRepository' while attempting to activate 'BookStoreApi.Controllers.ImagesController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method3(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-03 07:57:04.726 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7207/api/Images/Upload - 500 null text/plain; charset=utf-8 702.9823ms
+2025-10-03 07:57:04.729 +07:00 [INF] Connection id "0HNG22ULI0CN4", Request id "0HNG22ULI0CN4:00000009": the application completed without reading the entire request body.
+2025-10-03 07:57:52.228 +07:00 [INF] User profile is available. Using 'C:\Users\ITD\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-03 07:57:52.360 +07:00 [INF] Now listening on: https://localhost:7207
+2025-10-03 07:57:52.363 +07:00 [INF] Now listening on: http://localhost:5047
+2025-10-03 07:57:52.402 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-03 07:57:52.403 +07:00 [INF] Hosting environment: Development
+2025-10-03 07:57:52.405 +07:00 [INF] Content root path: E:\API_WEB\BookStoreApi\BookStoreApi
+2025-10-03 07:57:52.633 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/swagger/index.html - null null
+2025-10-03 07:57:52.718 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/swagger/index.html - 200 null text/html;charset=utf-8 88.1554ms
+2025-10-03 07:57:52.722 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-03 07:57:52.722 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/_vs/browserLink - null null
+2025-10-03 07:57:52.727 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 5.6691ms
+2025-10-03 07:57:52.744 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.9355ms
+2025-10-03 07:57:52.767 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7207/swagger/v1/swagger.json - null null
+2025-10-03 07:57:52.777 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7207/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.784ms

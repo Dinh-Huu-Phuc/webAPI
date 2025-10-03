@@ -38,6 +38,8 @@ builder.Services.AddScoped<IPublisherRepository, SQLPublisherRepository>();
 builder.Services.AddScoped<IAuthorRepository, SQLAuthorRepository>();
 builder.Services.AddScoped<IBookRepository, SQLBookRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>option.TokenValidationParameters = new TokenValidationParameters
 {

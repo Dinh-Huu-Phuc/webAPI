@@ -1,4 +1,5 @@
 ﻿
+using BookStoreApi.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models.Domain;
 
@@ -30,5 +31,6 @@ namespace WebAPI.Data
         public DbSet<Book_Authors> Books_Authors { get; set; }
         public DbSet<Publishers> Publishers { get; set; }
         public DbSet<Book_Authors> Book_Authors { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }

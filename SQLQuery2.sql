@@ -24,7 +24,7 @@ VALUES
 ('A Game of Thrones', 'The first novel in A Song of Ice and Fire series.', 0, NULL, NULL, 'Fantasy', 'http://example.com/cover4.jpg', '2023-04-05', 4),
 ('Norwegian Wood', 'A coming-of-age novel.', 1, '2023-05-30', 4, 'Fiction', 'http://example.com/cover5.jpg', '2023-05-20', 5);
 
-INSERT INTO Books_Authors (BookId, AuthorId)
+INSERT INTO Book_Authors (BookId, AuthorId)
 VALUES
 (1, 1),  
 (2, 2),  
@@ -41,5 +41,5 @@ VALUES
 
 --SELECT * FROM dbo.Book_Authors;
 
---EXEC sp_rename 'dbo.Book_Authors', 'Books_Authors';
+EXEC sp_rename 'dbo.Books_Authors', 'Book_Authors';
 
