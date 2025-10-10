@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\.github",
     "\\BookStoreApi",
-    "\\BookStoreApi\\Migrations"
+    "\\BookStoreApi\\Migrations",
+    "\\Library-web"
   ],
-  "SelectedNode": "\\BookStoreApi\\appsettings.json",
+  "SelectedNode": "\\Library-web\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
